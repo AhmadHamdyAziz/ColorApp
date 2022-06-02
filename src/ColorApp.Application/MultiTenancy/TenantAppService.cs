@@ -15,9 +15,11 @@ using ColorApp.Authorization.Users;
 using ColorApp.Editions;
 using ColorApp.MultiTenancy.Dto;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ColorApp.MultiTenancy
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [AbpAuthorize(PermissionNames.Pages_Tenants)]
     public class TenantAppService : AsyncCrudAppService<Tenant, TenantDto, int, PagedTenantResultRequestDto, CreateTenantDto, TenantDto>, ITenantAppService
     {

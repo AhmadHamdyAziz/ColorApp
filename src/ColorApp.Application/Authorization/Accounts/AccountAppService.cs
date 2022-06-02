@@ -3,9 +3,11 @@ using Abp.Configuration;
 using Abp.Zero.Configuration;
 using ColorApp.Authorization.Accounts.Dto;
 using ColorApp.Authorization.Users;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ColorApp.Authorization.Accounts
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AccountAppService : ColorAppAppServiceBase, IAccountAppService
     {
         // from: http://regexlib.com/REDetails.aspx?regexp_id=1923

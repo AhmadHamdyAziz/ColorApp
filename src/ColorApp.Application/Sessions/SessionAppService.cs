@@ -2,9 +2,11 @@
 using System.Threading.Tasks;
 using Abp.Auditing;
 using ColorApp.Sessions.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ColorApp.Sessions
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class SessionAppService : ColorAppAppServiceBase, ISessionAppService
     {
         [DisableAuditing]

@@ -20,6 +20,7 @@ using ColorApp.MultiTenancy;
 
 namespace ColorApp.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("api/[controller]/[action]")]
     public class TokenAuthController : ColorAppControllerBase
     {
@@ -49,6 +50,7 @@ namespace ColorApp.Controllers
             _userRegistrationManager = userRegistrationManager;
         }
 
+        [ApiExplorerSettings(IgnoreApi = false)]
         [HttpPost]
         public async Task<AuthenticateResultModel> Authenticate([FromBody] AuthenticateModel model)
         {

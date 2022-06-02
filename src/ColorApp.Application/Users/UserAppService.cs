@@ -21,10 +21,12 @@ using ColorApp.Authorization.Users;
 using ColorApp.Roles.Dto;
 using ColorApp.Users.Dto;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ColorApp.Users
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
@@ -53,6 +55,7 @@ namespace ColorApp.Users
             _logInManager = logInManager;
         }
 
+        [ApiExplorerSettings(IgnoreApi = false)]
         [AbpAllowAnonymous]
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {

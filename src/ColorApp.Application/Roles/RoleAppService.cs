@@ -13,10 +13,12 @@ using ColorApp.Authorization.Roles;
 using ColorApp.Authorization.Users;
 using ColorApp.Roles.Dto;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ColorApp.Roles
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [AbpAuthorize(PermissionNames.Pages_Roles)]
     public class RoleAppService : AsyncCrudAppService<Role, RoleDto, int, PagedRoleResultRequestDto, CreateRoleDto, RoleDto>, IRoleAppService
     {
