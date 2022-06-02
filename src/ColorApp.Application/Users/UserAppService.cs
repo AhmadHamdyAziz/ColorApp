@@ -57,14 +57,42 @@ namespace ColorApp.Users
 
         [ApiExplorerSettings(IgnoreApi = false)]
         [AbpAllowAnonymous]
+        public async Task<UserDto> Register(CreateAccountDto input)
+        {
+            CreateUserDto usrDto = new CreateUserDto()
+            {
+                IsActive = true,
+                EmailAddress = $"{input.UserName}@colorExample.com",
+                Name = $"{input.UserName}",
+                Surname = $"Sur_{input.UserName}",
+                RoleNames = new string[] { },
+                UserName = input.UserName,
+                Password = input.Password
+            };
+
+            var user = ObjectMapper.Map<User>(usrDto);
+
+            user.TenantId = AbpSession.TenantId;
+            user.IsEmailConfirmed = true;
+
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+            CheckErrors(await _userManager.CreateAsync(user, input.Password));
+
+            if (usrDto.RoleNames != null)
+            {
+                CheckErrors(await _userManager.SetRolesAsync(user, usrDto.RoleNames));
+            }
+
+            CurrentUnitOfWork.SaveChanges();
+
+            var returnDto = MapToEntityDto(user);
+            return returnDto;
+        }
+
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
-            //CheckCreatePermission();
-
-            input.IsActive = true;
-            input.EmailAddress = $"{input.UserName}@example.com";
-            input.Name = $"{input.UserName}";
-            input.Surname = $"Sur_{input.UserName}";
+            CheckCreatePermission();
 
             var user = ObjectMapper.Map<User>(input);
 

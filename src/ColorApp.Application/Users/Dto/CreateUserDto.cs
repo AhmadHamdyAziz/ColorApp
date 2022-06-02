@@ -14,15 +14,15 @@ namespace ColorApp.Users.Dto
         [StringLength(AbpUserBase.MaxUserNameLength)]
         public string UserName { get; set; }
 
-        //[Required]
+        [Required]
         [StringLength(AbpUserBase.MaxNameLength)]
         public string Name { get; set; } = "";
 
-        //[Required]
+        [Required]
         [StringLength(AbpUserBase.MaxSurnameLength)]
         public string Surname { get; set; } = "";
 
-        //[Required]
+        [Required]
         [EmailAddress]
         [StringLength(AbpUserBase.MaxEmailAddressLength)]
         public string EmailAddress { get; set; }
@@ -43,5 +43,17 @@ namespace ColorApp.Users.Dto
                 RoleNames = new string[0];
             }
         }
+    }
+
+    public class CreateAccountDto
+    {
+        [Required]
+        [StringLength(AbpUserBase.MaxUserNameLength)]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(AbpUserBase.MaxPlainPasswordLength)]
+        [DisableAuditing]
+        public string Password { get; set; }
     }
 }
